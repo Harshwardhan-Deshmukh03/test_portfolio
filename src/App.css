@@ -1,0 +1,10 @@
+/* ── App-level layout ───────────────────────────────── */
+.app {
+  position: relative;
+  z-index: 1;
+}
+
+.app__main {
+  position: relative;
+  z-index: 1;
+}
