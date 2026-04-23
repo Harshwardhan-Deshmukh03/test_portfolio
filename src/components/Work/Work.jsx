@@ -4,33 +4,33 @@ import './Work.css';
 
 const experiences = [
   {
-    role: 'Senior Full Stack Developer',
-    company: 'Tech Corp Inc.',
-    location: 'San Francisco, CA',
-    period: '2023 – Present',
+    role: 'Program Associate',
+    company: 'Wells Fargo',
+    location: 'Bengaluru, India',
+    period: '2025 – Present',
     description:
-      'Leading the development of scalable web applications using React, Node.js, and cloud services. Mentoring junior developers and driving engineering best practices across the team.',
-    tech: ['React', 'Node.js', 'AWS', 'PostgreSQL', 'Docker'],
+      'Working as a developer in Application Secure Data Exchange in the Open Banking domain.',
+    tech: ['JAVA', 'Spring Boot', 'React', 'Open Banking', 'Mongo DB'],
     current: true,
   },
   {
-    role: 'Frontend Developer',
-    company: 'Digital Solutions Ltd.',
-    location: 'New York, NY',
-    period: '2022 – 2023',
+    role: 'Technical Lead',
+    company: 'DSAI COEP Tech',
+    location: 'Pune, India',
+    period: '2024 – 2025',
     description:
-      'Built responsive, accessible user interfaces for enterprise clients. Implemented design systems and improved performance by 40% through code optimization.',
-    tech: ['React', 'TypeScript', 'GraphQL', 'Tailwind CSS'],
+      'Led DSAI club as AI Lead, managing technical teams, driving AI and LLM-based projects, and organizing sessions on machine learning, NLP, and industrial AI applications.',
+    tech: ['AI', 'ML', 'Data Science', 'LLM'],
     current: false,
   },
   {
-    role: 'Junior Developer',
-    company: 'StartUp Hub',
-    location: 'Remote',
-    period: '2021 – 2022',
+    role: 'Software Developer',
+    company: 'SDS COEP Tech',
+    location: 'Pune, India',
+    period: '2023 – 2024',
     description:
-      'Developed features for a SaaS platform serving 10K+ users. Collaborated closely with designers and product managers in an agile environment.',
-    tech: ['JavaScript', 'Vue.js', 'Firebase', 'Git'],
+      'Developed and delivered production-ready, scalable software applications as part of SDS, collaborating with teams to build solutions tailored to industry-grade organizational',
+    tech: ['MERN', 'DBMS', 'SQL'],
     current: false,
   },
 ];

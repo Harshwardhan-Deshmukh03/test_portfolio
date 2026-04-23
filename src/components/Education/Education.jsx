@@ -4,34 +4,34 @@ import './Education.css';
 
 const educationData = [
   {
-    degree: 'Master of Science in Computer Science',
-    institution: 'Stanford University',
-    location: 'Stanford, CA',
+    degree: 'Bachelor of Technology in Computer Science',
+    institution: 'College of Engineering, Pune',
+    location: 'Pune, India',
+    period: '2021 – 2025',
+    description:
+      'Built a strong foundation in software engineering, data structures, system design, and application security while actively working on AI-driven solutions, enterprise applications, and research-oriented projects in fintech and secure systems.',
+    honors: 'GPA: 3.7/4.0',
+    highlights: ['DSAI Tech Lead', 'Events Head CSI', 'Web Lead Regatta'],
+  },
+  {
+    degree: 'Honors in Data science',
+    institution: 'College of Engineering, Pune',
+    location: 'Pune, India',
+    period: '2024 – 2025',
+    description:
+      'Focused on machine learning, predictive analytics, and data-driven problem solving with practical experience in OCR automation, financial analysis systems, spam detection models, and intelligent workflow optimization.',
+    honors: 'GPA: 3.5/4.0',
+    highlights: ['Hackathon winner', 'Honors Program'],
+  },
+  {
+    degree: 'Higher Secondary Education',
+    institution: 'Deogiri College',
+    location: 'Aurangabad',
     period: '2019 – 2021',
     description:
-      'Specialized in Artificial Intelligence and Software Engineering. Conducted research on distributed systems and published 2 papers. Graduated with distinction.',
-    honors: 'GPA: 3.9/4.0',
-    highlights: ['AI/ML Specialization', 'Research Assistant', 'Dean\'s List'],
-  },
-  {
-    degree: 'Bachelor of Science in Computer Science',
-    institution: 'University of California, Berkeley',
-    location: 'Berkeley, CA',
-    period: '2015 – 2019',
-    description:
-      'Strong foundation in data structures, algorithms, and software engineering. Led the university coding club and participated in 5+ hackathons.',
-    honors: 'GPA: 3.7/4.0',
-    highlights: ['Coding Club President', 'Hackathon Winner', 'Honors Program'],
-  },
-  {
-    degree: 'High School Diploma',
-    institution: 'Lincoln High School',
-    location: 'San Jose, CA',
-    period: '2011 – 2015',
-    description:
-      'Valedictorian. Early start in programming through AP Computer Science. Built first web application in sophomore year.',
-    honors: 'Valedictorian',
-    highlights: ['AP Computer Science', 'Math Olympiad', 'Science Fair Winner'],
+      'Developed strong analytical and problem-solving skills with early exposure to programming, mathematics, and logical reasoning, which laid the foundation for pursuing advanced computer science and engineering projects.',
+    honors: 'Grade: 96.67%',
+    highlights: ['NTSE Scholar', 'MTSE Scholar'],
   },
 ];
 

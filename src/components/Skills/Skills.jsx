@@ -1,78 +1,84 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
-  SiReact, SiJavascript, SiTypescript, SiNodedotjs, SiPython,
-  SiMongodb, SiPostgresql, SiDocker, SiGit, SiTailwindcss,
-  SiNextdotjs, SiFigma, SiVercel, SiRedux, SiGraphql,
-  SiFirebase
+  SiReact, SiTypescript, SiAngular, SiFastapi,
+  SiPython, SiSpringboot, SiNodedotjs, SiNextdotjs,
 } from 'react-icons/si';
+import { TbApi, TbBrain, TbAtom, TbLink } from 'react-icons/tb';
+import { FiCpu, FiBox, FiLayers } from 'react-icons/fi';
+import { BsRobot } from 'react-icons/bs';
 import './Skills.css';
 
 const skillCategories = [
   {
-    title: 'Frontend',
+    title: 'Web Development',
     skills: [
       { name: 'React', icon: <SiReact />, level: 90, color: '#61DAFB' },
-      { name: 'JavaScript', icon: <SiJavascript />, level: 88, color: '#F7DF1E' },
-      { name: 'TypeScript', icon: <SiTypescript />, level: 80, color: '#3178C6' },
+      { name: 'TypeScript', icon: <SiTypescript />, level: 82, color: '#3178C6' },
+      { name: 'REST APIs', icon: <TbApi />, level: 88, color: '#00D4AA' },
+      { name: 'Angular', icon: <SiAngular />, level: 75, color: '#DD0031' },
+    ],
+  },
+  {
+    title: 'Backend & Systems',
+    skills: [
+      { name: 'Java (Spring Boot)', icon: <SiSpringboot />, level: 85, color: '#6DB33F' },
+      { name: 'Node.js', icon: <SiNodedotjs />, level: 83, color: '#339933' },
       { name: 'Next.js', icon: <SiNextdotjs />, level: 78, color: '#ffffff' },
-      { name: 'Tailwind CSS', icon: <SiTailwindcss />, level: 85, color: '#06B6D4' },
-      { name: 'Redux', icon: <SiRedux />, level: 75, color: '#764ABC' },
+      { name: 'Microservices', icon: <FiLayers />, level: 80, color: '#8B5CF6' },
+      { name: 'FastAPI', icon: <SiFastapi />, level: 78, color: '#009688' },
+      { name: 'API Design', icon: <FiBox />, level: 82, color: '#FF6B9D' },
     ],
   },
   {
-    title: 'Backend',
+    title: 'AI & Intelligent Systems',
     skills: [
-      { name: 'Node.js', icon: <SiNodedotjs />, level: 85, color: '#339933' },
-      { name: 'Python', icon: <SiPython />, level: 82, color: '#3776AB' },
-      { name: 'GraphQL', icon: <SiGraphql />, level: 70, color: '#E10098' },
-      { name: 'MongoDB', icon: <SiMongodb />, level: 80, color: '#47A248' },
-      { name: 'PostgreSQL', icon: <SiPostgresql />, level: 75, color: '#4169E1' },
-      { name: 'Firebase', icon: <SiFirebase />, level: 78, color: '#FFCA28' },
+      { name: 'Python', icon: <SiPython />, level: 88, color: '#3776AB' },
+      { name: 'AI Agents', icon: <BsRobot />, level: 80, color: '#6C63FF' },
+      { name: 'LLM Integrations', icon: <TbBrain />, level: 78, color: '#FF9F43' },
+      { name: 'MCP', icon: <FiCpu />, level: 72, color: '#00D4AA' },
     ],
   },
   {
-    title: 'Tools & DevOps',
+    title: 'Exploration',
     skills: [
-      { name: 'Git', icon: <SiGit />, level: 88, color: '#F05032' },
-      { name: 'Docker', icon: <SiDocker />, level: 72, color: '#2496ED' },
-      { name: 'Vercel', icon: <SiVercel />, level: 68, color: '#ffffff' },
-      { name: 'Figma', icon: <SiFigma />, level: 75, color: '#F24E1E' },
+      { name: 'Quantum ML', icon: <TbAtom />, level: 65, color: '#A855F7' },
+      { name: 'Blockchain', icon: <TbLink />, level: 60, color: '#F59E0B' },
     ],
   },
 ];
 
-// Build a flat list of all skill indices for auto-cycling
-const allSkillIndices = [];
-skillCategories.forEach((cat, catIdx) => {
-  cat.skills.forEach((_, skillIdx) => {
-    allSkillIndices.push({ catIdx, skillIdx });
-  });
-});
+// Each row starts at a different offset so the glows are staggered:
+// Row 0 → starts at skill 0, Row 1 → starts at skill 1, Row 2 → starts at skill 2, etc.
+const initialOffsets = skillCategories.map((_, i) => i);
+
+const CYCLE_INTERVAL = 3600; // 3x slower than the original 1200ms
 
 const Skills = () => {
-  const [activeIndex, setActiveIndex] = useState(0); // index into allSkillIndices
+  // One active index per category row
+  const [activeIndices, setActiveIndices] = useState(() =>
+    skillCategories.map((cat, i) => initialOffsets[i] % cat.skills.length)
+  );
   const [isHovering, setIsHovering] = useState(false);
   const [hoverKey, setHoverKey] = useState(null); // "catIdx-skillIdx"
 
-  // Auto-cycle when not hovering
+  // Independent cycling per category row
   useEffect(() => {
     if (isHovering) return;
 
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % allSkillIndices.length);
-    }, 1200);
+      setActiveIndices((prev) =>
+        prev.map((idx, catIdx) => (idx + 1) % skillCategories[catIdx].skills.length)
+      );
+    }, CYCLE_INTERVAL);
 
     return () => clearInterval(interval);
   }, [isHovering]);
 
-  const getActiveKey = useCallback(() => {
-    if (isHovering && hoverKey) return hoverKey;
-    const { catIdx, skillIdx } = allSkillIndices[activeIndex];
-    return `${catIdx}-${skillIdx}`;
-  }, [isHovering, hoverKey, activeIndex]);
-
-  const currentActiveKey = getActiveKey();
+  const isActive = (catIndex, skillIndex) => {
+    if (isHovering && hoverKey) return hoverKey === `${catIndex}-${skillIndex}`;
+    return activeIndices[catIndex] === skillIndex;
+  };
 
   return (
     <section className="skills section" id="skills">
@@ -106,12 +112,11 @@ const Skills = () => {
               <h3 className="skills__category-title">{category.title}</h3>
               <div className="skills__grid">
                 {category.skills.map((skill, skillIndex) => {
-                  const itemKey = `${catIndex}-${skillIndex}`;
-                  const isActive = currentActiveKey === itemKey;
+                  const active = isActive(catIndex, skillIndex);
 
                   return (
                     <motion.div
-                      className={`skills__item glass-card ${isActive ? 'skills__item--active' : ''}`}
+                      className={`skills__item glass-card ${active ? 'skills__item--active' : ''}`}
                       key={skillIndex}
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
@@ -119,13 +124,13 @@ const Skills = () => {
                       transition={{ duration: 0.4, delay: 0.1 + skillIndex * 0.05 }}
                       onMouseEnter={() => {
                         setIsHovering(true);
-                        setHoverKey(itemKey);
+                        setHoverKey(`${catIndex}-${skillIndex}`);
                       }}
                       onMouseLeave={() => {
                         setIsHovering(false);
                         setHoverKey(null);
                       }}
-                      style={isActive ? { '--glow-color': skill.color } : {}}
+                      style={active ? { '--glow-color': skill.color } : {}}
                     >
                       <div className="skills__item-icon" style={{ color: skill.color }}>
                         {skill.icon}
