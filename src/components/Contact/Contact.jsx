@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiMapPin, FiPhone, FiSend, FiGithub, FiLinkedin, FiFileText } from 'react-icons/fi';
+import emailjs from '@emailjs/browser';
 import ResumeModal from '../ResumeModal/ResumeModal';
 import './Contact.css';
 
@@ -11,26 +12,39 @@ const contactInfo = [
 ];
 
 const Contact = () => {
+  const formRef = useRef();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'sent' | 'error'
   const [resumeOpen, setResumeOpen] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In production, hook this to an email service like EmailJS, Formspree, etc.
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setStatus('sending');
+
+    try {
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+      setStatus('sent');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setStatus('idle'), 4000);
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
+    }
   };
 
   return (
@@ -107,6 +121,7 @@ const Contact = () => {
           </motion.div>
 
           <motion.form
+            ref={formRef}
             className="contact__form glass-card"
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 40 }}
@@ -171,10 +186,17 @@ const Contact = () => {
               />
             </div>
 
-            <button type="submit" className="contact__form-btn" disabled={submitted}>
-              {submitted ? (
+            <button type="submit" className={`contact__form-btn ${status === 'error' ? 'contact__form-btn--error' : ''}`} disabled={status === 'sending' || status === 'sent'}>
+              {status === 'sending' && (
+                <>⏳ Sending...</>
+              )}
+              {status === 'sent' && (
                 <>✓ Message Sent!</>
-              ) : (
+              )}
+              {status === 'error' && (
+                <>✕ Failed to send. Try again.</>
+              )}
+              {status === 'idle' && (
                 <><FiSend /> Send Message</>
               )}
             </button>

@@ -13,6 +13,10 @@
   gap: 60px;
 }
 
+.hero__content {
+  min-width: 0;
+}
+
 .hero__title {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 5vw, 4.2rem);
