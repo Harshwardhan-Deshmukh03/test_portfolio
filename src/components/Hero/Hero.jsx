@@ -1,30 +1,25 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiTwitter, FiArrowDownCircle } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiFileText, FiArrowDownCircle } from 'react-icons/fi';
 import { Link } from 'react-scroll';
+import profilePic from '../../assets/profile.jpg';
+import ResumeModal from '../ResumeModal/ResumeModal';
 import './Hero.css';
 
 const Hero = () => {
+  const [resumeOpen, setResumeOpen] = useState(false);
+
   return (
     <section className="hero section" id="home">
       <div className="hero__container container">
         <div className="hero__content">
-          <motion.div
-            className="hero__badge"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <span className="hero__badge-dot" />
-            Available for opportunities
-          </motion.div>
-
           <motion.h1
             className="hero__title"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            Hi, I&apos;m <span className="gradient-text">Your Name</span>
+            Hi, I&apos;m <span className="gradient-text">Deshmukh Harshwardhan</span>
             <br />
             Full Stack Developer
           </motion.h1>
@@ -66,9 +61,13 @@ const Hero = () => {
             <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hero__social-link" aria-label="LinkedIn">
               <FiLinkedin />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hero__social-link" aria-label="Twitter">
-              <FiTwitter />
-            </a>
+            <button
+              className="hero__social-link"
+              onClick={() => setResumeOpen(true)}
+              aria-label="Resume"
+            >
+              <FiFileText />
+            </button>
           </motion.div>
         </div>
 
@@ -82,8 +81,9 @@ const Hero = () => {
           <div className="hero__orb hero__orb--2" />
           <div className="hero__orb hero__orb--3" />
           <div className="hero__avatar-ring">
+            <div className="hero__avatar-glow" />
             <div className="hero__avatar">
-              <span className="hero__avatar-text">YN</span>
+              <img src={profilePic} alt="Harshwardhan Deshmukh" className="hero__avatar-img" />
             </div>
           </div>
         </motion.div>
@@ -99,6 +99,8 @@ const Hero = () => {
           <FiArrowDownCircle className="hero__scroll-icon" />
         </Link>
       </motion.div>
+
+      <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
     </section>
   );
 };

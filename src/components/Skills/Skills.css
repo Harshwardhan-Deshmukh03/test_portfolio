@@ -32,22 +32,37 @@
   gap: 12px;
   padding: 24px 16px;
   text-align: center;
+  --glow-color: var(--accent-primary);
 }
 
 .skills__item-icon {
   font-size: 2rem;
-  transition: var(--transition-fast);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.skills__item:hover .skills__item-icon {
-  transform: scale(1.15);
-  filter: drop-shadow(0 0 12px currentColor);
+/* Active state (auto-cycle OR hover) */
+.skills__item--active {
+  background: var(--bg-glass-hover) !important;
+  border-color: var(--border-accent) !important;
+  box-shadow: 0 0 25px color-mix(in srgb, var(--glow-color) 20%, transparent);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.skills__item--active .skills__item-icon {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 14px var(--glow-color));
+}
+
+.skills__item--active .skills__item-name {
+  color: var(--text-primary);
 }
 
 .skills__item-name {
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-secondary);
+  transition: color 0.3s ease;
 }
 
 .skills__bar {

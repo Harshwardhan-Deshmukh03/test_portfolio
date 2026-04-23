@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiMail, FiMapPin, FiPhone, FiSend, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
+import { FiMail, FiMapPin, FiPhone, FiSend, FiGithub, FiLinkedin, FiFileText } from 'react-icons/fi';
+import ResumeModal from '../ResumeModal/ResumeModal';
 import './Contact.css';
 
 const contactInfo = [
-  { icon: <FiMail />, label: 'Email', value: 'hello@yourname.com', href: 'mailto:hello@yourname.com' },
-  { icon: <FiMapPin />, label: 'Location', value: 'San Francisco, CA', href: null },
-  { icon: <FiPhone />, label: 'Phone', value: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-];
-
-const socialLinks = [
-  { icon: <FiGithub />, href: 'https://github.com', label: 'GitHub' },
-  { icon: <FiLinkedin />, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: <FiTwitter />, href: 'https://twitter.com', label: 'Twitter' },
+  { icon: <FiMail />, label: 'Email', value: 'harshwardhanrdd@gmail.com', href: 'mailto:harshwardhanrdd@gmail.com' },
+  { icon: <FiMapPin />, label: 'Location', value: 'Bengaluru, KA, IND', href: null },
+  { icon: <FiPhone />, label: 'Phone', value: '+(91) 7387058440', href: 'tel:+917387058440' },
 ];
 
 const Contact = () => {
@@ -23,6 +18,7 @@ const Contact = () => {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -94,18 +90,19 @@ const Contact = () => {
             </div>
 
             <div className="contact__socials">
-              {socialLinks.map((social, i) => (
-                <a
-                  key={i}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="contact__social-link"
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </a>
-              ))}
+              <a href="https://github.com" target="_blank" rel="noreferrer" className="contact__social-link" aria-label="GitHub">
+                <FiGithub />
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="contact__social-link" aria-label="LinkedIn">
+                <FiLinkedin />
+              </a>
+              <button
+                className="contact__social-link"
+                onClick={() => setResumeOpen(true)}
+                aria-label="Resume"
+              >
+                <FiFileText />
+              </button>
             </div>
           </motion.div>
 
@@ -184,6 +181,8 @@ const Contact = () => {
           </motion.form>
         </div>
       </div>
+
+      <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
     </section>
   );
 };

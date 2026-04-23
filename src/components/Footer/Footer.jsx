@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Link } from 'react-scroll';
-import { FiGithub, FiLinkedin, FiTwitter, FiHeart } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiFileText } from 'react-icons/fi';
+import ResumeModal from '../ResumeModal/ResumeModal';
 import './Footer.css';
 
 const footerLinks = [
@@ -11,14 +13,9 @@ const footerLinks = [
   { to: 'contact', label: 'Contact' },
 ];
 
-const socialLinks = [
-  { icon: <FiGithub />, href: 'https://github.com', label: 'GitHub' },
-  { icon: <FiLinkedin />, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: <FiTwitter />, href: 'https://twitter.com', label: 'Twitter' },
-];
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   return (
     <footer className="footer">
@@ -26,7 +23,7 @@ const Footer = () => {
         <div className="footer__top">
           <Link to="home" smooth duration={600} className="footer__logo">
             <span className="footer__logo-bracket">&lt;</span>
-            Portfolio
+            harsh.dev
             <span className="footer__logo-bracket"> /&gt;</span>
           </Link>
 
@@ -46,18 +43,19 @@ const Footer = () => {
           </nav>
 
           <div className="footer__socials">
-            {socialLinks.map((social, i) => (
-              <a
-                key={i}
-                href={social.href}
-                target="_blank"
-                rel="noreferrer"
-                className="footer__social-link"
-                aria-label={social.label}
-              >
-                {social.icon}
-              </a>
-            ))}
+            <a href="https://github.com" target="_blank" rel="noreferrer" className="footer__social-link" aria-label="GitHub">
+              <FiGithub />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="footer__social-link" aria-label="LinkedIn">
+              <FiLinkedin />
+            </a>
+            <button
+              className="footer__social-link"
+              onClick={() => setResumeOpen(true)}
+              aria-label="Resume"
+            >
+              <FiFileText />
+            </button>
           </div>
         </div>
 
@@ -65,13 +63,12 @@ const Footer = () => {
 
         <div className="footer__bottom">
           <p className="footer__copyright">
-            &copy; {currentYear} Your Name. All rights reserved.
-          </p>
-          <p className="footer__built">
-            Built with <FiHeart className="footer__heart" /> using React
+            &copy; {currentYear} Harshwardhan Deshmukh.
           </p>
         </div>
       </div>
+
+      <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
     </footer>
   );
 };

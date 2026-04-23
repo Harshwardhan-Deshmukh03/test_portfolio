@@ -65,6 +65,7 @@
   color: var(--text-secondary);
   font-size: 1rem;
   transition: var(--transition-fast);
+  cursor: pointer;
 }
 
 .footer__social-link:hover {
@@ -82,10 +83,8 @@
 
 .footer__bottom {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
 }
 
 .footer__copyright {
@@ -93,24 +92,7 @@
   color: var(--text-muted);
 }
 
-.footer__built {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-}
 
-.footer__heart {
-  color: var(--accent-tertiary);
-  font-size: 0.9rem;
-  animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
 
 @media (max-width: 768px) {
   .footer__top {

@@ -1,3 +1,4 @@
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
   SiReact, SiJavascript, SiTypescript, SiNodedotjs, SiPython,
@@ -41,7 +42,38 @@ const skillCategories = [
   },
 ];
 
+// Build a flat list of all skill indices for auto-cycling
+const allSkillIndices = [];
+skillCategories.forEach((cat, catIdx) => {
+  cat.skills.forEach((_, skillIdx) => {
+    allSkillIndices.push({ catIdx, skillIdx });
+  });
+});
+
 const Skills = () => {
+  const [activeIndex, setActiveIndex] = useState(0); // index into allSkillIndices
+  const [isHovering, setIsHovering] = useState(false);
+  const [hoverKey, setHoverKey] = useState(null); // "catIdx-skillIdx"
+
+  // Auto-cycle when not hovering
+  useEffect(() => {
+    if (isHovering) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % allSkillIndices.length);
+    }, 1200);
+
+    return () => clearInterval(interval);
+  }, [isHovering]);
+
+  const getActiveKey = useCallback(() => {
+    if (isHovering && hoverKey) return hoverKey;
+    const { catIdx, skillIdx } = allSkillIndices[activeIndex];
+    return `${catIdx}-${skillIdx}`;
+  }, [isHovering, hoverKey, activeIndex]);
+
+  const currentActiveKey = getActiveKey();
+
   return (
     <section className="skills section" id="skills">
       <div className="skills__container container">
@@ -73,32 +105,45 @@ const Skills = () => {
             >
               <h3 className="skills__category-title">{category.title}</h3>
               <div className="skills__grid">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    className="skills__item glass-card"
-                    key={skillIndex}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.1 + skillIndex * 0.05 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <div className="skills__item-icon" style={{ color: skill.color }}>
-                      {skill.icon}
-                    </div>
-                    <span className="skills__item-name">{skill.name}</span>
-                    <div className="skills__bar">
-                      <motion.div
-                        className="skills__bar-fill"
-                        style={{ background: skill.color }}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.3 }}
-                      />
-                    </div>
-                  </motion.div>
-                ))}
+                {category.skills.map((skill, skillIndex) => {
+                  const itemKey = `${catIndex}-${skillIndex}`;
+                  const isActive = currentActiveKey === itemKey;
+
+                  return (
+                    <motion.div
+                      className={`skills__item glass-card ${isActive ? 'skills__item--active' : ''}`}
+                      key={skillIndex}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.1 + skillIndex * 0.05 }}
+                      onMouseEnter={() => {
+                        setIsHovering(true);
+                        setHoverKey(itemKey);
+                      }}
+                      onMouseLeave={() => {
+                        setIsHovering(false);
+                        setHoverKey(null);
+                      }}
+                      style={isActive ? { '--glow-color': skill.color } : {}}
+                    >
+                      <div className="skills__item-icon" style={{ color: skill.color }}>
+                        {skill.icon}
+                      </div>
+                      <span className="skills__item-name">{skill.name}</span>
+                      <div className="skills__bar">
+                        <motion.div
+                          className="skills__bar-fill"
+                          style={{ background: skill.color }}
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1, delay: 0.3 }}
+                        />
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           ))}

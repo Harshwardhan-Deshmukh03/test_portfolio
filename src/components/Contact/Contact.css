@@ -89,6 +89,7 @@ a.contact__info-value:hover {
   color: var(--text-secondary);
   font-size: 1.1rem;
   transition: var(--transition-fast);
+  cursor: pointer;
 }
 
 .contact__social-link:hover {

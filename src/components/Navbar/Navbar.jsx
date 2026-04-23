@@ -34,7 +34,7 @@ const Navbar = () => {
       <div className="navbar__container container">
         <Link to="home" smooth duration={600} className="navbar__logo">
           <span className="navbar__logo-bracket">&lt;</span>
-          Portfolio
+          harsh.dev
           <span className="navbar__logo-bracket"> /&gt;</span>
         </Link>
 
