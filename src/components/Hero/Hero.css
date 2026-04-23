@@ -22,6 +22,25 @@
   letter-spacing: -1px;
 }
 
+/* ── Typewriter ── */
+.hero__typed-role {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero__cursor {
+  display: inline-block;
+  font-weight: 300;
+  color: var(--accent-primary);
+  animation: blink-cursor 0.75s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 .hero__description {
   font-size: 1.1rem;
   color: var(--text-secondary);

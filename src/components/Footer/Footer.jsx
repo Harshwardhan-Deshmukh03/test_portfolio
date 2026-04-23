@@ -43,10 +43,10 @@ const Footer = () => {
           </nav>
 
           <div className="footer__socials">
-            <a href="https://github.com" target="_blank" rel="noreferrer" className="footer__social-link" aria-label="GitHub">
+            <a href="https://github.com/Harshwardhan-Deshmukh03" target="_blank" rel="noreferrer" className="footer__social-link" aria-label="GitHub">
               <FiGithub />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="footer__social-link" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/harshwardhan-deshmukh-3b0043179/" target="_blank" rel="noreferrer" className="footer__social-link" aria-label="LinkedIn">
               <FiLinkedin />
             </a>
             <button

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { FiGithub, FiLinkedin, FiFileText, FiArrowDownCircle } from 'react-icons/fi';
 import { Link } from 'react-scroll';
@@ -6,8 +6,47 @@ import profilePic from '../../assets/profile.jpg';
 import ResumeModal from '../ResumeModal/ResumeModal';
 import './Hero.css';
 
+const roles = ['Full Stack Developer', 'Backend Engineer', 'AI Systems Builder'];
+
+const useTypewriter = (words, typingSpeed = 100, deletingSpeed = 60, pauseDuration = 1800) => {
+  const [displayText, setDisplayText] = useState('');
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const tick = useCallback(() => {
+    const currentWord = words[wordIndex];
+
+    if (!isDeleting) {
+      // Typing
+      setDisplayText(currentWord.substring(0, displayText.length + 1));
+      if (displayText.length + 1 === currentWord.length) {
+        // Finished typing — pause then start deleting
+        setTimeout(() => setIsDeleting(true), pauseDuration);
+        return;
+      }
+    } else {
+      // Deleting
+      setDisplayText(currentWord.substring(0, displayText.length - 1));
+      if (displayText.length - 1 === 0) {
+        setIsDeleting(false);
+        setWordIndex((prev) => (prev + 1) % words.length);
+        return;
+      }
+    }
+  }, [displayText, isDeleting, wordIndex, words, pauseDuration]);
+
+  useEffect(() => {
+    const speed = isDeleting ? deletingSpeed : typingSpeed;
+    const timer = setTimeout(tick, speed);
+    return () => clearTimeout(timer);
+  }, [tick, isDeleting, typingSpeed, deletingSpeed]);
+
+  return displayText;
+};
+
 const Hero = () => {
   const [resumeOpen, setResumeOpen] = useState(false);
+  const typedRole = useTypewriter(roles);
 
   return (
     <section className="hero section" id="home">
@@ -21,7 +60,10 @@ const Hero = () => {
           >
             Hi, I&apos;m <span className="gradient-text">Deshmukh Harshwardhan</span>
             <br />
-            Full Stack Developer
+            <span className="hero__typed-role">
+              {typedRole}
+              <span className="hero__cursor">|</span>
+            </span>
           </motion.h1>
 
           <motion.p
@@ -55,10 +97,10 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.9 }}
           >
-            <a href="https://github.com" target="_blank" rel="noreferrer" className="hero__social-link" aria-label="GitHub">
+            <a href="https://github.com/Harshwardhan-Deshmukh03" target="_blank" rel="noreferrer" className="hero__social-link" aria-label="GitHub">
               <FiGithub />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hero__social-link" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/harshwardhan-deshmukh-3b0043179/" target="_blank" rel="noreferrer" className="hero__social-link" aria-label="LinkedIn">
               <FiLinkedin />
             </a>
             <button

@@ -62,8 +62,8 @@ const Contact = () => {
           >
             <h3 className="contact__info-title">Get in touch</h3>
             <p className="contact__info-text">
-              I&apos;m currently open to freelance opportunities, full-time positions,
-              and interesting collaborations. Don&apos;t hesitate to reach out!
+              I&apos;m currently open to collaborations and working on great projects.
+              Don&apos;t hesitate to reach out!
             </p>
 
             <div className="contact__info-items">
@@ -90,10 +90,10 @@ const Contact = () => {
             </div>
 
             <div className="contact__socials">
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="contact__social-link" aria-label="GitHub">
+              <a href="https://github.com/Harshwardhan-Deshmukh03" target="_blank" rel="noreferrer" className="contact__social-link" aria-label="GitHub">
                 <FiGithub />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="contact__social-link" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/harshwardhan-deshmukh-3b0043179/" target="_blank" rel="noreferrer" className="contact__social-link" aria-label="LinkedIn">
                 <FiLinkedin />
               </a>
               <button
