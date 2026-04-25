@@ -53,7 +53,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <p className="about__bio">
-              I&apos;m an Application Security Engineer and Full Stack Developer focused on building secure, scalable, and impactful digital solutions. My work spans enterprise applications, open banking systems, AI-driven platforms, and secure data exchange with a strong emphasis on performance and reliability.
+              I&apos;m a Full Stack Developer focused on building secure, scalable, and impactful digital solutions. My work spans enterprise applications, open banking systems, AI-driven platforms, and secure data exchange with a strong emphasis on performance and reliability.
             </p>
 
             <p className="about__bio">

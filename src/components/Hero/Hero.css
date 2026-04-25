@@ -4,6 +4,7 @@
   align-items: center;
   position: relative;
   padding-top: 100px;
+  overflow-x: clip;
 }
 
 .hero__container {
@@ -29,7 +30,8 @@
 /* ── Typewriter ── */
 .hero__typed-role {
   display: inline-block;
-  white-space: nowrap;
+  min-width: 14ch;
+  text-align: left;
 }
 
 .hero__cursor {
@@ -292,14 +294,31 @@
 }
 
 @media (max-width: 900px) {
+  .hero {
+    overflow: hidden;
+  }
+
   .hero__container {
     grid-template-columns: 1fr;
     text-align: center;
   }
 
+  .hero__title {
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    word-break: break-word;
+  }
+
+  .hero__typed-role {
+    display: block;
+    min-width: unset;
+    text-align: center;
+    min-height: 1.2em;
+  }
+
   .hero__description {
     margin-left: auto;
     margin-right: auto;
+    font-size: 0.95rem;
   }
 
   .hero__actions {
@@ -311,16 +330,38 @@
   }
 
   .hero__visual {
-    height: 300px;
+    height: 280px;
   }
 
   .hero__avatar-ring {
-    width: 210px;
-    height: 210px;
+    width: 200px;
+    height: 200px;
   }
 
   .hero__avatar {
-    width: 200px;
-    height: 200px;
+    width: 190px;
+    height: 190px;
+  }
+
+  .hero__orb--1 {
+    width: 180px;
+    height: 180px;
+    right: -20px;
+    top: -20px;
+  }
+
+  .hero__orb--2 {
+    width: 120px;
+    height: 120px;
+  }
+
+  .hero__orb--3 {
+    width: 100px;
+    height: 100px;
+  }
+
+  .hero__avatar-glow {
+    width: 220px;
+    height: 220px;
   }
 }
