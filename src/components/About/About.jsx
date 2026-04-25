@@ -1,29 +1,29 @@
 import { motion } from 'framer-motion';
-import { FiCode, FiLayers, FiZap } from 'react-icons/fi';
+import { FiLayers, FiShield, FiCpu } from 'react-icons/fi';
 import './About.css';
 
 const stats = [
   { number: '3+', label: 'Years Experience' },
-  { number: '20+', label: 'Projects Built' },
+  // { number: '20+', label: 'Projects Built' },
   { number: '10+', label: 'Technologies' },
-  { number: '5+', label: 'Happy Clients' },
+  // { number: '5+', label: 'Happy Clients' },
 ];
 
 const highlights = [
-  {
-    icon: <FiCode />,
-    title: 'Clean Code',
-    description: 'Writing maintainable, well-documented code following industry best practices.',
-  },
   {
     icon: <FiLayers />,
     title: 'Full Stack',
     description: 'End-to-end development from responsive UIs to robust backend systems.',
   },
   {
-    icon: <FiZap />,
-    title: 'Performance',
-    description: 'Optimizing for speed, accessibility, and exceptional user experience.',
+    icon: <FiShield />,
+    title: 'Application Security',
+    description: 'Building secure systems with strong focus on secure data exchange, open banking, encryption models, and enterprise-grade application protection.',
+  },
+  {
+    icon: <FiCpu />,
+    title: 'AI & Research',
+    description: 'Working on AI-driven solutions, quantum research, OCR automation, machine learning models, and intelligent financial system optimization.',
   },
 ];
 
@@ -53,16 +53,11 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <p className="about__bio">
-              I&apos;m a passionate Full Stack Developer with a love for creating
-              elegant solutions to complex problems. My journey in software
-              development started with curiosity and has evolved into a deep
-              commitment to building impactful digital products.
+              I&apos;m an Application Security Engineer and Full Stack Developer focused on building secure, scalable, and impactful digital solutions. My work spans enterprise applications, open banking systems, AI-driven platforms, and secure data exchange with a strong emphasis on performance and reliability.
             </p>
+
             <p className="about__bio">
-              When I&apos;m not coding, you&apos;ll find me exploring new
-              technologies, contributing to open source, or sharing knowledge
-              with the developer community. I believe in continuous learning and
-              pushing the boundaries of what&apos;s possible with technology.
+              Beyond development, I actively work on AI research, quantum computing concepts, and intelligent automation systems including OCR, machine learning, and financial analytics. I enjoy solving complex engineering problems and creating technology that delivers real-world business value.
             </p>
 
             <div className="about__stats">

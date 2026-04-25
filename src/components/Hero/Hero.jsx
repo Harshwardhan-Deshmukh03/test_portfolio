@@ -6,7 +6,7 @@ import profilePic from '../../assets/profile.jpg';
 import ResumeModal from '../ResumeModal/ResumeModal';
 import './Hero.css';
 
-const roles = ['Full Stack Developer', 'Backend Engineer', 'AI Systems Builder'];
+const roles = ['UI Developer', 'Backend Engineer', 'ML Engineer'];
 
 const useTypewriter = (words, typingSpeed = 100, deletingSpeed = 60, pauseDuration = 1800) => {
   const [displayText, setDisplayText] = useState('');
