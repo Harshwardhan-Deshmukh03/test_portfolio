@@ -1,107 +1,80 @@
 import { motion } from 'framer-motion';
-import { FiBookOpen, FiCalendar, FiMapPin, FiAward } from 'react-icons/fi';
+import { FiAward, FiBookOpen, FiCalendar } from 'react-icons/fi';
 import './Education.css';
 
 const educationData = [
   {
-    degree: 'Bachelor of Technology in Computer Science',
+    degree: 'B.Tech — Computer Science',
     institution: 'College of Engineering, Pune',
-    location: 'Pune, India',
     period: '2021 – 2025',
-    description:
-      'Built a strong foundation in software engineering, data structures, system design, and application security while actively working on AI-driven solutions, enterprise applications, and research-oriented projects in fintech and secure systems.',
-    honors: 'GPA: 3.7/4.0',
-    highlights: ['DSAI Tech Lead', 'Events Head CSI', 'Web Lead Regatta'],
+    honors: 'GPA: 3.7 / 4.0',
+    highlights: ['DSAI Tech Lead', 'Events Head — CSI', 'Web Lead — Regatta'],
   },
   {
-    degree: 'Honors in Data science',
+    degree: 'Honors in Data Science',
     institution: 'College of Engineering, Pune',
-    location: 'Pune, India',
     period: '2024 – 2025',
-    description:
-      'Focused on machine learning, predictive analytics, and data-driven problem solving with practical experience in OCR automation, financial analysis systems, spam detection models, and intelligent workflow optimization.',
-    honors: 'GPA: 3.5/4.0',
+    honors: 'GPA: 3.5 / 4.0',
     highlights: ['Hackathon winner', 'Honors Program'],
   },
   {
     degree: 'Higher Secondary Education',
     institution: 'Deogiri College',
-    location: 'Aurangabad',
     period: '2019 – 2021',
-    description:
-      'Developed strong analytical and problem-solving skills with early exposure to programming, mathematics, and logical reasoning, which laid the foundation for pursuing advanced computer science and engineering projects.',
     honors: 'Grade: 96.67%',
     highlights: ['NTSE Scholar', 'MTSE Scholar'],
   },
 ];
 
-const Education = () => {
-  return (
-    <section className="education section" id="education">
-      <div className="education__container container">
-        <motion.div
-          className="education__header"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="section-label">Education</span>
-          <h2 className="section-title">
-            Academic <span className="gradient-text">journey</span>
-          </h2>
-          <p className="section-subtitle" style={{ margin: '0 auto' }}>
-            The foundation that shaped my technical expertise
-          </p>
-        </motion.div>
+const Education = () => (
+  <section className="education section" id="education">
+    <div className="education__container container">
+      <motion.div
+        className="education__header"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-80px' }}
+        transition={{ duration: 0.5 }}
+      >
+        <span className="section-label">06 / Education</span>
+        <div className="education__heading-row">
+          <h2 className="section-title">The foundation behind the <span className="gradient-text">work.</span></h2>
+          <p className="section-subtitle">Kept intentionally compact—the professional work and projects above do the heavier lifting.</p>
+        </div>
+      </motion.div>
 
-        <div className="education__grid">
-          {educationData.map((edu, i) => (
-            <motion.div
-              className="education__card glass-card"
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-            >
-              <div className="education__card-accent" />
-              <div className="education__card-content">
-                <div className="education__card-top">
-                  <div className="education__icon-wrap">
-                    <FiBookOpen />
-                  </div>
-                  <div className="education__meta-badges">
-                    {edu.honors && (
-                      <span className="education__honors">
-                        <FiAward /> {edu.honors}
-                      </span>
-                    )}
-                  </div>
+      <div className="education__list">
+        {educationData.map((edu, index) => (
+          <motion.article
+            className="education__item"
+            key={edu.degree}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.45, delay: index * 0.06 }}
+          >
+            <div className="education__index">0{index + 1}</div>
+            <div className="education__main">
+              <div className="education__topline">
+                <div>
+                  <h3>{edu.degree}</h3>
+                  <p>{edu.institution}</p>
                 </div>
-
-                <h3 className="education__degree">{edu.degree}</h3>
-                <div className="education__institution">{edu.institution}</div>
-
-                <div className="education__meta">
-                  <span><FiCalendar /> {edu.period}</span>
-                  <span><FiMapPin /> {edu.location}</span>
-                </div>
-
-                <p className="education__description">{edu.description}</p>
-
+                <span className="education__period"><FiCalendar /> {edu.period}</span>
+              </div>
+              <div className="education__bottomline">
+                <span className="education__honors"><FiAward /> {edu.honors}</span>
                 <div className="education__highlights">
-                  {edu.highlights.map((h, idx) => (
-                    <span className="education__highlight-tag" key={idx}>{h}</span>
-                  ))}
+                  {edu.highlights.map((highlight) => <span key={highlight}>{highlight}</span>)}
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+            <FiBookOpen className="education__icon" aria-hidden="true" />
+          </motion.article>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Education;

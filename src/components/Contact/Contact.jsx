@@ -1,14 +1,12 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FiMail, FiMapPin, FiPhone, FiSend, FiGithub, FiLinkedin, FiFileText } from 'react-icons/fi';
+import { FiMail, FiMapPin, FiSend, FiGithub, FiLinkedin, FiArrowUpRight } from 'react-icons/fi';
 import emailjs from '@emailjs/browser';
-import ResumeModal from '../ResumeModal/ResumeModal';
 import './Contact.css';
 
 const contactInfo = [
   { icon: <FiMail />, label: 'Email', value: 'harshwardhanrdd@gmail.com', href: 'mailto:harshwardhanrdd@gmail.com' },
   { icon: <FiMapPin />, label: 'Location', value: 'Bengaluru, KA, IND', href: null },
-  { icon: <FiPhone />, label: 'Phone', value: '+(91) 7387058440', href: 'tel:+917387058440' },
 ];
 
 const Contact = () => {
@@ -20,7 +18,6 @@ const Contact = () => {
     message: '',
   });
   const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'sent' | 'error'
-  const [resumeOpen, setResumeOpen] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,13 +54,9 @@ const Contact = () => {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-label">Contact</span>
-          <h2 className="section-title">
-            Let&apos;s work <span className="gradient-text">together</span>
-          </h2>
-          <p className="section-subtitle" style={{ margin: '0 auto' }}>
-            Have a project in mind or just want to say hi? I&apos;d love to hear from you.
-          </p>
+          <span className="section-label">07 / Contact</span>
+          <h2 className="section-title">Let&apos;s build something <span className="gradient-text">interesting.</span></h2>
+          <p className="section-subtitle">Whether it&apos;s a backend problem, an AI idea, or a product worth building, I&apos;m always interested in good engineering problems.</p>
         </motion.div>
 
         <div className="contact__content">
@@ -74,11 +67,9 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="contact__info-title">Get in touch</h3>
-            <p className="contact__info-text">
-              I&apos;m currently open to collaborations and working on great projects.
-              Don&apos;t hesitate to reach out!
-            </p>
+            <span className="contact__eyebrow">Start a conversation</span>
+            <h3 className="contact__info-title">Have a problem worth solving?</h3>
+            <p className="contact__info-text">Send me the context, the constraint, or just the rough idea. Email is the quickest way to reach me.</p>
 
             <div className="contact__info-items">
               {contactInfo.map((item, i) => (
@@ -103,20 +94,9 @@ const Contact = () => {
               ))}
             </div>
 
-            <div className="contact__socials">
-              <a href="https://github.com/Harshwardhan-Deshmukh03" target="_blank" rel="noreferrer" className="contact__social-link" aria-label="GitHub">
-                <FiGithub />
-              </a>
-              <a href="https://www.linkedin.com/in/harshwardhan-deshmukh-3b0043179/" target="_blank" rel="noreferrer" className="contact__social-link" aria-label="LinkedIn">
-                <FiLinkedin />
-              </a>
-              <button
-                className="contact__social-link"
-                onClick={() => setResumeOpen(true)}
-                aria-label="Resume"
-              >
-                <FiFileText />
-              </button>
+            <div className="contact__links">
+              <a href="https://github.com/Harshwardhan-Deshmukh03" target="_blank" rel="noreferrer">GitHub <FiArrowUpRight /></a>
+              <a href="https://www.linkedin.com/in/harshwardhan-deshmukh-3b0043179/" target="_blank" rel="noreferrer">LinkedIn <FiArrowUpRight /></a>
             </div>
           </motion.div>
 
@@ -204,7 +184,6 @@ const Contact = () => {
         </div>
       </div>
 
-      <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
     </section>
   );
 };

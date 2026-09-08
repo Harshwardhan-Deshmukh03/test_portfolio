@@ -1,147 +1,181 @@
+import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiGithub, FiExternalLink, FiStar } from 'react-icons/fi';
+import { FiArrowUpRight, FiGithub, FiLayers, FiStar } from 'react-icons/fi';
 import './Projects.css';
 
 const projectsData = [
   {
-    title: 'Personal Finance Management application',
-    description:
-      'FinSo is a comprehensive personal finance management application offering features like transaction management, investment tracking, financial reporting, and more. The application also provides SMS automation, spam detection, and various other financial utilities.',
-    tech: ['Android', 'Django', 'SQL', 'Graph', 'OCR'],
+    title: 'FinSo',
+    label: 'Personal Finance Platform',
+    description: 'A finance platform for transaction management, investment tracking, reporting, SMS automation and spam detection.',
+    tech: ['Android', 'Django', 'SQL', 'OCR'],
+    category: 'Full Stack',
     github: 'https://github.com/Harshwardhan-Deshmukh03/Binary_Brigade_SGU',
-    live: null,
     featured: true,
-    color: '#6c63ff',
+    code: 'FIN',
   },
   {
     title: 'QODE-LSTM',
-    description:
-      'A hybrid quantum-classical deep learning architecture that fuses Variational Quantum Circuits, Neural ODEs, and Peephole LSTM cells',
+    label: 'Quantum / Deep Learning',
+    description: 'A hybrid architecture combining Variational Quantum Circuits, Neural ODEs and Peephole LSTM cells for sequential modelling.',
     tech: ['Qiskit', 'QML', 'Torch'],
+    category: 'AI / ML',
     github: 'https://github.com/Harshwardhan-Deshmukh03/QODE-LSTM',
-    live: null,
-    featured: false,
-    color: '#00d4aa',
+    code: 'QDL',
   },
   {
-    title: 'Youtube Algorithm Analyser',
-    description:
-      'YouTubeAlgoAnalyser is a web application designed to assist YouTube content creators focused on "Environment and Sustainable development" in improving their SEO strategies.',
-    tech: ['Flask', 'Data Analytics', 'Trend Analysis'],
+    title: 'YouTube Algorithm Analyser',
+    label: 'SEO & Data Analytics',
+    description: 'A web application that helps sustainability-focused creators improve YouTube SEO through trend and data analysis.',
+    tech: ['Flask', 'Analytics', 'Trend Analysis'],
+    category: 'Full Stack',
     github: 'https://github.com/Harshwardhan-Deshmukh03/BitBusters',
-    live: null,
-    featured: false,
-    color: '#ff6b9d',
+    code: 'YAA',
   },
   {
     title: 'Smart Library Management App',
-    description:
-      'A native Android application that digitizes the end-to-end operations of a college library.',
+    label: 'Native Android',
+    description: 'A native Android application that digitizes end-to-end college library operations.',
     tech: ['Android', 'Firebase', 'Java', 'XML'],
+    category: 'Full Stack',
     github: 'https://github.com/Harshwardhan-Deshmukh03/COEP-TECH-LIBRARY',
-    live: null,
-    featured: false,
-    color: '#f59e0b',
+    code: 'LIB',
   },
   {
     title: 'Adaptive Quantum Key Distribution',
-    description:
-      'Adaptive Quantum Key Distribution (AQKD) system combining quantum cryptography, classical post-processing, and a QNN Machine Learning Model for optimizing security dynamically.',
-    tech: ['Qiskit', 'Protocol design', 'QML'],
+    label: 'Security Research',
+    description: 'An adaptive QKD system combining quantum cryptography, classical post-processing and QNN-based dynamic optimisation.',
+    tech: ['Qiskit', 'Protocols', 'QML'],
+    category: 'Systems',
     github: 'https://github.com/Harshwardhan-Deshmukh03/AQKD',
-    live: null,
-    featured: false,
-    color: '#8b5cf6',
+    code: 'AQK',
   },
   {
-    title: 'Image Manipulation engine',
-    description:
-      'A high-performance C-based image manipulation engine that uses a Quadtree data structure as the universal intermediate representation for all operations.',
-    tech: ['DSA', 'QuadTree', 'C', 'Image-manipulation'],
+    title: 'Image Manipulation Engine',
+    label: 'Algorithms / C',
+    description: 'A C-based image manipulation engine using a Quadtree as an intermediate representation for image operations.',
+    tech: ['C', 'DSA', 'Quadtree'],
+    category: 'Systems',
     github: 'https://github.com/Harshwardhan-Deshmukh03/Image-Manipulation-QuadTree',
-    live: null,
-    featured: false,
-    color: '#06b6d4',
+    code: 'IMG',
   },
   {
-    title: 'PrepiZard: Interview Preparation Portal',
-    description:
-      'Prepizard is a premium, feature-rich platform designed to empower software developers during their interview preparation.',
-    tech: ['Python', 'Django', 'SQL', 'Websockets', 'HackerRank API'],
+    title: 'PrepiZard',
+    label: 'Interview Preparation Portal',
+    description: 'A developer interview-preparation platform with real-time features and HackerRank integration.',
+    tech: ['Python', 'Django', 'SQL', 'WebSockets'],
+    category: 'Full Stack',
     github: 'https://github.com/Harshwardhan-Deshmukh03/PrepIzard',
-    live: null,
-    featured: false,
-    color: '#6c63ff',
+    code: 'PREP',
   },
 ];
 
+const filters = ['All', 'Full Stack', 'AI / ML', 'Systems'];
+
 const Projects = () => {
+  const [filter, setFilter] = useState('All');
+
+  const visibleProjects = useMemo(
+    () => filter === 'All' ? projectsData : projectsData.filter((project) => project.category === filter),
+    [filter]
+  );
+
+  const featuredProject = projectsData.find((project) => project.featured);
+
   return (
     <section className="projects section" id="projects">
       <div className="projects__container container">
         <motion.div
           className="projects__header"
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.5 }}
         >
-          <span className="section-label">Projects</span>
-          <h2 className="section-title">
-            Things I&apos;ve <span className="gradient-text">built</span>
-          </h2>
-          <p className="section-subtitle" style={{ margin: '0 auto' }}>
-            A collection of projects that showcase my skills and passion for development
-          </p>
+          <span className="section-label">04 / Selected work</span>
+          <div className="projects__heading-row">
+            <div>
+              <h2 className="section-title">Things I&apos;ve <span className="gradient-text">built.</span></h2>
+              <p className="section-subtitle">Side projects across full-stack development, AI, systems and research.</p>
+            </div>
+            <div className="projects__filters" role="tablist" aria-label="Project filters">
+              {filters.map((item) => (
+                <button
+                  type="button"
+                  key={item}
+                  className={filter === item ? 'projects__filter projects__filter--active' : 'projects__filter'}
+                  onClick={() => setFilter(item)}
+                  aria-selected={filter === item}
+                  role="tab"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
-        <div className="projects__grid">
-          {projectsData.map((project, i) => (
-            <motion.div
-              className={`projects__card glass-card ${project.featured ? 'projects__card--featured' : ''}`}
-              key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <div
-                className="projects__card-accent"
-                style={{ background: project.color }}
-              />
-              <div className="projects__card-content">
-                <div className="projects__card-top">
-                  <div className="projects__card-folder">
-                    {project.featured ? (
-                      <FiStar className="projects__star-icon" />
-                    ) : (
-                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-                      </svg>
-                    )}
-                  </div>
-                  <div className="projects__card-links">
-                    <a href={project.github} target="_blank" rel="noreferrer" aria-label="GitHub repo">
-                      <FiGithub />
-                    </a>
-                    {project.live && (
-                      <a href={project.live} target="_blank" rel="noreferrer" aria-label="Live demo">
-                        <FiExternalLink />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                <h3 className="projects__card-title">{project.title}</h3>
-                <p className="projects__card-description">{project.description}</p>
-
-                <div className="projects__card-tech">
-                  {project.tech.map((t, idx) => (
-                    <span className="projects__tech-tag" key={idx}>{t}</span>
-                  ))}
-                </div>
+        {filter === 'All' && (
+          <motion.article
+            className="projects__featured"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="projects__featured-visual">
+              <div className="projects__visual-grid" />
+              <span className="projects__visual-code">{featuredProject.code}</span>
+              <span className="projects__visual-label">Featured project</span>
+              <div className="projects__visual-window">
+                <div /><div /><div />
               </div>
-            </motion.div>
+            </div>
+            <div className="projects__featured-content">
+              <div className="projects__project-meta">
+                <span>01 / Featured</span>
+                <FiStar />
+              </div>
+              <p className="projects__project-label">{featuredProject.label}</p>
+              <h3>{featuredProject.title}</h3>
+              <p>{featuredProject.description}</p>
+              <div className="projects__tech">
+                {featuredProject.tech.map((tech) => <span key={tech}>{tech}</span>)}
+              </div>
+              <a href={featuredProject.github} target="_blank" rel="noreferrer" className="projects__project-link">
+                View repository <FiArrowUpRight />
+              </a>
+            </div>
+          </motion.article>
+        )}
+
+        <div className="projects__grid">
+          {visibleProjects.filter((project) => !project.featured || filter !== 'All').map((project, index) => (
+            <motion.article
+              className="projects__card"
+              key={project.title}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.4, delay: index * 0.04 }}
+            >
+              <div className="projects__card-visual">
+                <span>{project.code}</span>
+                <FiLayers />
+              </div>
+              <div className="projects__card-content">
+                <div className="projects__project-meta"><span>{project.category}</span><span>0{index + 2}</span></div>
+                <p className="projects__project-label">{project.label}</p>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div className="projects__tech">
+                  {project.tech.map((tech) => <span key={tech}>{tech}</span>)}
+                </div>
+                <a href={project.github} target="_blank" rel="noreferrer" className="projects__project-link">
+                  GitHub <FiArrowUpRight />
+                </a>
+              </div>
+            </motion.article>
           ))}
         </div>
       </div>

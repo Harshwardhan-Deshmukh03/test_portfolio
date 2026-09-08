@@ -1,76 +1,48 @@
-import { useState } from 'react';
 import { Link } from 'react-scroll';
-import { FiGithub, FiLinkedin, FiFileText } from 'react-icons/fi';
-import ResumeModal from '../ResumeModal/ResumeModal';
+import { FiArrowUpRight, FiGithub, FiLinkedin } from 'react-icons/fi';
 import './Footer.css';
 
 const footerLinks = [
-  { to: 'home', label: 'Home' },
   { to: 'about', label: 'About' },
-  { to: 'skills', label: 'Skills' },
-  { to: 'work', label: 'Work' },
+  { to: 'work', label: 'Experience' },
   { to: 'projects', label: 'Projects' },
+  { to: 'skills', label: 'Stack' },
   { to: 'contact', label: 'Contact' },
 ];
 
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  const [resumeOpen, setResumeOpen] = useState(false);
-
-  return (
-    <footer className="footer">
-      <div className="footer__container container">
-        <div className="footer__top">
+const Footer = () => (
+  <footer className="footer">
+    <div className="footer__container container">
+      <div className="footer__top">
+        <div className="footer__brand">
           <Link to="home" smooth duration={600} className="footer__logo">
-            <span className="footer__logo-bracket">&lt;</span>
-            harsh.dev
-            <span className="footer__logo-bracket"> /&gt;</span>
+            <span>&lt;/&gt;</span> harsh.dev
           </Link>
-
-          <nav className="footer__nav">
-            {footerLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                smooth
-                duration={600}
-                offset={-80}
-                className="footer__nav-link"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="footer__socials">
-            <a href="https://github.com/Harshwardhan-Deshmukh03" target="_blank" rel="noreferrer" className="footer__social-link" aria-label="GitHub">
-              <FiGithub />
-            </a>
-            <a href="https://www.linkedin.com/in/harshwardhan-deshmukh-3b0043179/" target="_blank" rel="noreferrer" className="footer__social-link" aria-label="LinkedIn">
-              <FiLinkedin />
-            </a>
-            <button
-              className="footer__social-link"
-              onClick={() => setResumeOpen(true)}
-              aria-label="Resume"
-            >
-              <FiFileText />
-            </button>
-          </div>
+          <p>Building scalable software systems.</p>
         </div>
 
-        <div className="footer__divider" />
+        <nav className="footer__nav" aria-label="Footer navigation">
+          {footerLinks.map((link) => (
+            <Link key={link.to} to={link.to} smooth duration={600} offset={-84} className="footer__nav-link">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
-        <div className="footer__bottom">
-          <p className="footer__copyright">
-            &copy; {currentYear} Harshwardhan Deshmukh.
-          </p>
+        <div className="footer__socials">
+          <a href="https://github.com/Harshwardhan-Deshmukh03" target="_blank" rel="noreferrer" aria-label="GitHub"><FiGithub /></a>
+          <a href="https://www.linkedin.com/in/harshwardhan-deshmukh-3b0043179/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FiLinkedin /></a>
         </div>
       </div>
 
-      <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
-    </footer>
-  );
-};
+      <div className="footer__divider" />
+
+      <div className="footer__bottom">
+        <p>© {new Date().getFullYear()} Harshwardhan Deshmukh</p>
+        <Link to="home" smooth duration={600} className="footer__top-link">Back to top <FiArrowUpRight /></Link>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;

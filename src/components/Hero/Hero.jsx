@@ -1,150 +1,75 @@
-import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiFileText, FiArrowDownCircle } from 'react-icons/fi';
+import { FiArrowDownRight, FiArrowUpRight, FiGithub, FiLinkedin } from 'react-icons/fi';
 import { Link } from 'react-scroll';
 import profilePic from '../../assets/profile.jpg';
-import ResumeModal from '../ResumeModal/ResumeModal';
 import './Hero.css';
 
-const roles = ['UI Developer', 'Backend Engineer', 'ML Engineer'];
+const RESUME_URL = '/Harshwardhan_Deshmukh_resume.pdf';
 
-const useTypewriter = (words, typingSpeed = 100, deletingSpeed = 60, pauseDuration = 1800) => {
-  const [displayText, setDisplayText] = useState('');
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  const tick = useCallback(() => {
-    const currentWord = words[wordIndex];
-
-    if (!isDeleting) {
-      // Typing
-      setDisplayText(currentWord.substring(0, displayText.length + 1));
-      if (displayText.length + 1 === currentWord.length) {
-        // Finished typing — pause then start deleting
-        setTimeout(() => setIsDeleting(true), pauseDuration);
-        return;
-      }
-    } else {
-      // Deleting
-      setDisplayText(currentWord.substring(0, displayText.length - 1));
-      if (displayText.length - 1 === 0) {
-        setIsDeleting(false);
-        setWordIndex((prev) => (prev + 1) % words.length);
-        return;
-      }
-    }
-  }, [displayText, isDeleting, wordIndex, words, pauseDuration]);
-
-  useEffect(() => {
-    const speed = isDeleting ? deletingSpeed : typingSpeed;
-    const timer = setTimeout(tick, speed);
-    return () => clearTimeout(timer);
-  }, [tick, isDeleting, typingSpeed, deletingSpeed]);
-
-  return displayText;
-};
-
-const Hero = () => {
-  const [resumeOpen, setResumeOpen] = useState(false);
-  const typedRole = useTypewriter(roles);
-
-  return (
-    <section className="hero section" id="home">
-      <div className="hero__container container">
-        <div className="hero__content">
-          <motion.h1
-            className="hero__title"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-          >
-            Hi, I&apos;m <span className="gradient-text">Deshmukh Harshwardhan</span>
-            <br />
-            <span className="hero__typed-role">
-              {typedRole}
-              <span className="hero__cursor">|</span>
-            </span>
-          </motion.h1>
-
-          <motion.p
-            className="hero__description"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-          >
-            I craft exceptional digital experiences with modern technologies.
-            Passionate about building scalable applications and beautiful user
-            interfaces that make an impact.
-          </motion.p>
-
-          <motion.div
-            className="hero__actions"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.7 }}
-          >
-            <Link to="projects" smooth duration={600} offset={-80} className="hero__btn hero__btn--primary">
-              View My Work
-            </Link>
-            <Link to="contact" smooth duration={600} offset={-80} className="hero__btn hero__btn--secondary">
-              Get In Touch
-            </Link>
-          </motion.div>
-
-          <motion.div
-            className="hero__socials"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.9 }}
-          >
-            <a href="https://github.com/Harshwardhan-Deshmukh03" target="_blank" rel="noreferrer" className="hero__social-link" aria-label="GitHub">
-              <FiGithub />
-            </a>
-            <a href="https://www.linkedin.com/in/harshwardhan-deshmukh-3b0043179/" target="_blank" rel="noreferrer" className="hero__social-link" aria-label="LinkedIn">
-              <FiLinkedin />
-            </a>
-            <button
-              className="hero__social-link"
-              onClick={() => setResumeOpen(true)}
-              aria-label="Resume"
-            >
-              <FiFileText />
-            </button>
-          </motion.div>
+const Hero = () => (
+  <section className="hero section" id="home">
+    <div className="hero__container container">
+      <motion.div
+        className="hero__content"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.65 }}
+      >
+        <div className="hero__eyebrow">
+          <span>01 / Software Engineer</span>
+          <span className="hero__status"><i /> Currently @ Wells Fargo</span>
         </div>
 
-        <motion.div
-          className="hero__visual"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <div className="hero__orb hero__orb--1" />
-          <div className="hero__orb hero__orb--2" />
-          <div className="hero__orb hero__orb--3" />
-          <div className="hero__avatar-ring">
-            <div className="hero__avatar-glow" />
-            <div className="hero__avatar">
-              <img src={profilePic} alt="Harshwardhan Deshmukh" className="hero__avatar-img" />
-            </div>
-          </div>
-        </motion.div>
-      </div>
+        <h1 className="hero__title">
+          I build <span className="gradient-text">scalable</span><br />
+          software systems.
+        </h1>
 
-      <motion.div
-        className="hero__scroll-indicator"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-      >
-        <Link to="about" smooth duration={600} offset={-80}>
-          <FiArrowDownCircle className="hero__scroll-icon" />
-        </Link>
+        <p className="hero__description">
+          Full-stack engineer focused on backend systems, secure data exchange,
+          AI-powered applications, and products that have to work beyond the demo.
+        </p>
+
+        <div className="hero__actions">
+          <Link to="projects" smooth duration={600} offset={-84} className="hero__btn hero__btn--primary">
+            View Projects <FiArrowDownRight />
+          </Link>
+          <a href={RESUME_URL} target="_blank" rel="noreferrer" className="hero__btn hero__btn--secondary">
+            Resume <FiArrowUpRight />
+          </a>
+        </div>
+
+        <div className="hero__socials">
+          <a href="https://github.com/Harshwardhan-Deshmukh03" target="_blank" rel="noreferrer" className="hero__social-link">
+            <FiGithub /> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/harshwardhan-deshmukh-3b0043179/" target="_blank" rel="noreferrer" className="hero__social-link">
+            <FiLinkedin /> LinkedIn
+          </a>
+        </div>
       </motion.div>
 
-      <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
-    </section>
-  );
-};
+      <motion.div
+        className="hero__visual"
+        initial={{ opacity: 0, x: 30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, delay: 0.15 }}
+      >
+        <div className="hero__visual-label">Bengaluru / India</div>
+        <div className="hero__portrait-frame">
+          <img src={profilePic} alt="Harshwardhan Deshmukh" className="hero__portrait" />
+          <div className="hero__frame-corner hero__frame-corner--tl" />
+          <div className="hero__frame-corner hero__frame-corner--br" />
+        </div>
+        <div className="hero__visual-note">JAVA · SPRING BOOT · REACT · AI</div>
+      </motion.div>
+    </div>
+
+    <div className="hero__scroll-cue">
+      <span>Scroll to explore</span>
+      <FiArrowDownRight />
+    </div>
+  </section>
+);
 
 export default Hero;
