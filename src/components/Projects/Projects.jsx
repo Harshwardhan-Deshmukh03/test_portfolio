@@ -1,6 +1,13 @@
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowUpRight, FiGithub, FiLayers, FiStar } from 'react-icons/fi';
+import { FiArrowUpRight, FiStar } from 'react-icons/fi';
+import finsoImage from '../../assets/projects/finso-generated.png';
+import qodeImage from '../../assets/projects/qode-lstm-generated.png';
+import youtubeAnalyserImage from '../../assets/projects/youtube-analyser-generated.png';
+import libraryImage from '../../assets/projects/library-generated-v2.png';
+import aqkdImage from '../../assets/projects/aqkd-generated.png';
+import imageEngineImage from '../../assets/projects/image-engine-generated.png';
+import prepizardImage from '../../assets/projects/prepizard-generated.png';
 import './Projects.css';
 
 const projectsData = [
@@ -13,6 +20,7 @@ const projectsData = [
     github: 'https://github.com/Harshwardhan-Deshmukh03/Binary_Brigade_SGU',
     featured: true,
     code: 'FIN',
+    image: finsoImage,
   },
   {
     title: 'QODE-LSTM',
@@ -22,6 +30,7 @@ const projectsData = [
     category: 'AI / ML',
     github: 'https://github.com/Harshwardhan-Deshmukh03/QODE-LSTM',
     code: 'QDL',
+    image: qodeImage,
   },
   {
     title: 'YouTube Algorithm Analyser',
@@ -31,6 +40,7 @@ const projectsData = [
     category: 'Full Stack',
     github: 'https://github.com/Harshwardhan-Deshmukh03/BitBusters',
     code: 'YAA',
+    image: youtubeAnalyserImage,
   },
   {
     title: 'Smart Library Management App',
@@ -40,6 +50,7 @@ const projectsData = [
     category: 'Full Stack',
     github: 'https://github.com/Harshwardhan-Deshmukh03/COEP-TECH-LIBRARY',
     code: 'LIB',
+    image: libraryImage,
   },
   {
     title: 'Adaptive Quantum Key Distribution',
@@ -49,6 +60,7 @@ const projectsData = [
     category: 'Systems',
     github: 'https://github.com/Harshwardhan-Deshmukh03/AQKD',
     code: 'AQK',
+    image: aqkdImage,
   },
   {
     title: 'Image Manipulation Engine',
@@ -58,6 +70,7 @@ const projectsData = [
     category: 'Systems',
     github: 'https://github.com/Harshwardhan-Deshmukh03/Image-Manipulation-QuadTree',
     code: 'IMG',
+    image: imageEngineImage,
   },
   {
     title: 'PrepiZard',
@@ -67,6 +80,7 @@ const projectsData = [
     category: 'Full Stack',
     github: 'https://github.com/Harshwardhan-Deshmukh03/PrepIzard',
     code: 'PREP',
+    image: prepizardImage,
   },
 ];
 
@@ -98,15 +112,14 @@ const Projects = () => {
               <h2 className="section-title">Things I&apos;ve <span className="gradient-text">built.</span></h2>
               <p className="section-subtitle">Side projects across full-stack development, AI, systems and research.</p>
             </div>
-            <div className="projects__filters" role="tablist" aria-label="Project filters">
+            <div className="projects__filters" aria-label="Project filters">
               {filters.map((item) => (
                 <button
                   type="button"
                   key={item}
                   className={filter === item ? 'projects__filter projects__filter--active' : 'projects__filter'}
                   onClick={() => setFilter(item)}
-                  aria-selected={filter === item}
-                  role="tab"
+                  aria-pressed={filter === item}
                 >
                   {item}
                 </button>
@@ -124,12 +137,8 @@ const Projects = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="projects__featured-visual">
-              <div className="projects__visual-grid" />
-              <span className="projects__visual-code">{featuredProject.code}</span>
+              <img src={featuredProject.image} alt={`${featuredProject.title} project preview`} />
               <span className="projects__visual-label">Featured project</span>
-              <div className="projects__visual-window">
-                <div /><div /><div />
-              </div>
             </div>
             <div className="projects__featured-content">
               <div className="projects__project-meta">
@@ -160,8 +169,11 @@ const Projects = () => {
               transition={{ duration: 0.4, delay: index * 0.04 }}
             >
               <div className="projects__card-visual">
-                <span>{project.code}</span>
-                <FiLayers />
+                {project.image ? (
+                  <img src={project.image} alt="" loading="lazy" />
+                ) : (
+                  <span>{project.code}</span>
+                )}
               </div>
               <div className="projects__card-content">
                 <div className="projects__project-meta"><span>{project.category}</span><span>0{index + 2}</span></div>

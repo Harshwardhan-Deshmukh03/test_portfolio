@@ -67,7 +67,7 @@
 .work__card {
   padding: 26px;
   border: 1px solid var(--border-subtle);
-  background: rgba(10, 10, 10, 0.9);
+  background: rgba(255, 255, 255, 0.52);
   transition: border-color var(--transition-medium), box-shadow var(--transition-medium), transform var(--transition-medium);
 }
 
@@ -77,8 +77,8 @@
 }
 
 .work__item--current .work__card {
-  border-color: rgba(57, 255, 20, 0.28);
-  background: linear-gradient(90deg, rgba(57, 255, 20, 0.045), rgba(10, 10, 10, 0.9) 34%);
+  border-color: rgba(26, 92, 255, 0.22);
+  background: linear-gradient(90deg, rgba(26, 92, 255, 0.035), rgba(255, 255, 255, 0.58) 34%);
 }
 
 .work__card-topline {
@@ -168,6 +168,7 @@
 @media (max-width: 560px) {
   .work__timeline {
     padding-left: 20px;
+  margin-left: 0;
   }
 
   .work__marker {

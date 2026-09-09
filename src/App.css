@@ -1,8 +1,22 @@
 .app {
   position: relative;
   min-height: 100vh;
-  isolation: isolate;
-  z-index: 1;
+  background: var(--bg-primary);
+}
+
+.app::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 0;
+  height: min(760px, 70vh);
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 92%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 92%);
 }
 
 .app__main {
